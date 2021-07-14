@@ -13,7 +13,7 @@ export class AppComponent {
   public info$: Observable<Array<{ data: { x: string, y: number }[], title: string }>> | undefined;
 
   async ngOnInit() {
-    const res = await fetch('/assets/datatran2020.csv');
+    const res = await fetch('assets/datatran2020.csv');
     const txt = await res.text();
 
     let result: Array<{ [key: string]: string }> = parse(txt, { delimiter: ";", columns: true });
