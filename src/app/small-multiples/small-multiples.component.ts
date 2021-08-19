@@ -36,7 +36,7 @@ export class SmallMultiplesComponent {
     .map(year => ({
       name: `Acidentes Detran ${year}`,
       delimiter: ';',
-      data: fetch(`/assets/datatran${year}.csv`).then(res => res.text())
+      data: fetch(`assets/datatran${year}.csv`).then(res => res.text())
     }));
 
   dataset = new FormControl(null, Validators.required);
@@ -104,7 +104,6 @@ export class SmallMultiplesComponent {
     ));
 
   constructor(private matDialog: MatDialog) {
-    this.matDialog.open(UploadDatasetComponent).afterClosed().toPromise();
     this.dataset.valueChanges
       .pipe(startWith(this.dataset.value))
       .subscribe(async dataset => {
