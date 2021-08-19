@@ -13,5 +13,13 @@
     <input matInput placeholder="Delimitador" formControlName="delimiter">
   </mat-form-field>
   <input type="file" #file (change)="fileChange($event)">
-  <button mat-raised-button color="primary" mat-dialog-close="form.value" [disabled]="!form.valid">Ok</button>
+  <div>
+    <mat-spinner diameter="36" [style.visibility]="form.status == 'PENDING' ? null : 'hidden'"></mat-spinner>
+    <button mat-raised-button mat-dialog-close>
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid">
+      Ok
+    </button>
+  </div>
 </form>

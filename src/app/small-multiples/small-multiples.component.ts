@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { parse } from 'csv/lib/es5/sync';
-import { access } from 'fs';
 import { asyncScheduler, from, Observable, of, scheduled } from 'rxjs';
-import { count, groupBy, map, mergeMap, startWith, tap, toArray } from 'rxjs/operators';
+import { count, groupBy, map, mergeMap, startWith, toArray } from 'rxjs/operators';
 import { LoadingComponent } from '../loading/loading.component';
 import { UploadDatasetComponent } from './upload-dataset/upload-dataset.component';
 
@@ -20,7 +19,11 @@ const days = [
   "sexta",
   "sexta-feira",
   "sábado",
-  "domingo"
+  "domingo",
+  "amanhecer",
+  "pleno dia",
+  "anoitecer",
+  "plena noite"
 ]
 
 @Component({
@@ -34,7 +37,7 @@ export class SmallMultiplesComponent {
     .fill(0)
     .map((v, i) => i + 2007)
     .map(year => ({
-      name: `Acidentes Detran ${year}`,
+      name: `Acidentes Datatran ${year}`,
       delimiter: ';',
       data: fetch(`assets/datatran${year}.csv`).then(res => res.text())
     }));
@@ -77,8 +80,8 @@ export class SmallMultiplesComponent {
             )),
             toArray(),
             map(vals => vals.sort((a, b) => {
-              const dayOfWeekA = days.indexOf(a.label);
-              const dayOfWeekB = days.indexOf(b.label);
+              const dayOfWeekA = days.indexOf(`${a.label}`.trim().toLowerCase());
+              const dayOfWeekB = days.indexOf(`${b.label}`.trim().toLowerCase());
               if (dayOfWeekA != -1) {
                 return dayOfWeekA - dayOfWeekB;
               } else if (a.label == b.label) {
@@ -127,7 +130,7 @@ export class SmallMultiplesComponent {
     ev.stopPropagation();
     let dataset = await this.matDialog.open(UploadDatasetComponent).afterClosed().toPromise();
     if (dataset) {
-      // TODO this.datasets.push(dataset);
+      this.datasets.push(dataset);
     }
   }
 

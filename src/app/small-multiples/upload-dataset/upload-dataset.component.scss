@@ -6,3 +6,9 @@ form {
 input[type="file"] {
   display: none;
 }
+
+div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
+}

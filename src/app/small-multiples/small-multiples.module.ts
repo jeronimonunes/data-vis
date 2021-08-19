@@ -10,6 +10,8 @@ import { LineChartDirective } from './line-chart.directive';
 import { SmallMultiplesRoutingModule } from './small-multiples-routing.module';
 import { SmallMultiplesComponent } from './small-multiples.component';
 import { UploadDatasetComponent } from './upload-dataset/upload-dataset.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -27,6 +29,8 @@ import { UploadDatasetComponent } from './upload-dataset/upload-dataset.componen
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule
   ]
 })
