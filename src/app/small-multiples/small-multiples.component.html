@@ -27,6 +27,17 @@
     </mat-select>
   </mat-form-field>
 </form>
-<ng-container *ngIf="info$ | async as info">
+<ng-container *ngIf="info$ | async as info; else explain">
   <canvas width="500" height="250" *ngFor="let chart of info" [appLineChart]="chart"></canvas>
 </ng-container>
+<ng-template #explain>
+  <p>
+    Com essa visualização você poderá gerar múltiplos gráficos com base em uma coluna da base de dados (Título dos
+    gráficos).
+    Nesses gráficos o eixo y será sempre o número de linhas encontradas no seu dataset de acordo com aquele título e
+    também com o valor do eixo x.
+    O eixo x são as "categorias", também personalizáveis de acordo com uma coluna da base de dados.
+    Estão disponíveis os datasets de acidentes de trânsito de 2007 a 2021, mas você também pode subir seu próprio
+    arquivo CSV.
+  </p>
+</ng-template>
