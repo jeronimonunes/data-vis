@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { parse } from 'csv/lib/es5/sync';
-import { from, Observable } from 'rxjs';
-import { count, groupBy, map, mergeMap, skip, toArray } from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { LoadingComponent } from './loading/loading.component';
 
 @Component({
   selector: 'app-root',
@@ -10,31 +10,29 @@ import { count, groupBy, map, mergeMap, skip, toArray } from 'rxjs/operators';
 })
 export class AppComponent {
 
-  public info$: Observable<Array<{ data: { x: string, y: number }[], title: string }>> | undefined;
+  constructor(private router: Router, private matDialog: MatDialog) {
+    let ref: MatDialogRef<LoadingComponent> | null = null;
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        if (ref)
+          ref.close();
+        ref = this.matDialog.open(LoadingComponent, { disableClose: true });
+      }
+      if (event instanceof NavigationEnd) {
+        if (ref)
+          ref.close();
+      }
 
-  async ngOnInit() {
-    const res = await fetch('assets/datatran2020.csv');
-    const txt = await res.text();
-
-    let result: Array<{ [key: string]: string }> = parse(txt, { delimiter: ";", columns: true });
-
-    this.info$ = from(result).pipe(
-      groupBy(item => item.causa_acidente),
-      mergeMap(byAccident =>
-        byAccident.pipe(
-          groupBy(item => item.horario.substring(0, 2)),
-          mergeMap(byHour => byHour.pipe(
-            count(),
-            map(qtd => ({ qtd, horario: byHour.key }))
-          )),
-          toArray(),
-          map(vals => vals.sort((a, b) => a.horario == b.horario ? 0 : a.horario > b.horario ? 1 : -1)),
-          map(vals => vals.map(({ horario, qtd }) => ({ x: horario, y: qtd }))),
-          map(data => ({ title: byAccident.key, data }))
-        )
-      ),
-      toArray()
-    );
+      // Set loading state to false in both of the below events to hide the spinner in case a request fails
+      if (event instanceof NavigationCancel) {
+        if (ref)
+          ref.close();
+      }
+      if (event instanceof NavigationError) {
+        if (ref)
+          ref.close();
+      }
+    })
   }
 
 }

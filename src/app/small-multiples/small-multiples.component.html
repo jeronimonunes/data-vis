@@ -1,0 +1,32 @@
+<form>
+  <mat-form-field>
+    <mat-label>Dataset</mat-label>
+    <mat-select [formControl]="dataset">
+      <mat-option *ngFor="let dataset of datasets" [value]="dataset">
+        {{dataset.name}}
+      </mat-option>
+    </mat-select>
+    <button mat-icon-button matSuffix (click)="upload($event)">
+      <mat-icon>upload</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field *ngIf="columns$ | async as columns">
+    <mat-label>Título dos gráficos</mat-label>
+    <mat-select [formControl]="column">
+      <mat-option *ngFor="let column of columns" [value]="column">
+        {{column}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="columns$ | async as columns">
+    <mat-label>Categorias</mat-label>
+    <mat-select [formControl]="agregatingColumn">
+      <mat-option *ngFor="let column of columns" [value]="column">
+        {{column}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<ng-container *ngIf="info$ | async as info">
+  <canvas width="500" height="250" *ngFor="let chart of info" [appLineChart]="chart"></canvas>
+</ng-container>

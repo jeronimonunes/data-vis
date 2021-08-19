@@ -74,4 +74,4 @@ import 'zone.js';  // Included with Angular CLI.
   }
 };
 import { Buffer } from 'buffer';
-global.Buffer = Buffer;
+(window as any)['global'].Buffer = Buffer;

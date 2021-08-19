@@ -1,4 +1,4 @@
-<ng-container *ngIf="info$ | async as info">
-  <canvas width="500" height="250" *ngFor="let chart of info" [appLineChart]="chart.data"
-    [title]="chart.title"></canvas>
-</ng-container>
+<mat-toolbar color="primary">
+  <span color="accent">Pequenos múltiplos Datatram</span>
+</mat-toolbar>
+<router-outlet></router-outlet>

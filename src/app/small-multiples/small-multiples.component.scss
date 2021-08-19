@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+}
+
+form {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 1em;
+  width: 100%;
+}
