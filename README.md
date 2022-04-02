@@ -1,27 +1,15 @@
 # DataVis
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.0.
+Visualizador de dados no formato de pequenos múltiplos.
+Pré-carregado com dados de acidentes de carros do DETRAN-MG mas com a possibilidade de carregar arquivos CSV.
+Visualize em https://jeronimonunes.github.io/data-vis/
 
-## Development server
+Projeto construído utilizando Angular CLI. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# DataVis
 
-## Code scaffolding
+Data vizualization tool to see charts in small multiples format.
+Pre-loaded with data from the traffic department of the state of Minas Gerais but you can load CSV files.
+Visualize at https://jeronimonunes.github.io/data-vis/
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Project built using Angular CLI. 
